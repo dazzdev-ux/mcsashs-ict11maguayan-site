@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 11 Maguayan - ICT-Computer System Servicing</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background: linear-gradient(135deg, #0a0a0a, #1a1a2e); color: #00ff88; margin: 0; padding: 0; overflow-x: hidden; }
+        header { text-align: center; padding: 50px 20px; background: rgba(0, 0, 0, 0.8); border-bottom: 2px solid #00ff88; animation: glow 2s infinite alternate; }
+        @keyframes glow { from { text-shadow: 0 0 10px #00ff88; } to { text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; } }
+        h1 { font-size: 3em; margin: 0; }
+        section { padding: 40px 20px; max-width: 800px; margin: 0 auto; }
+        .techy-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .counter { text-align: center; font-size: 1.5em; margin: 20px 0; }
+        form { display: flex; flex-direction: column; gap: 10px; }
+        input, textarea { padding: 10px; background: #222; border: 1px solid #00ff88; color: #00ff88; }
+        button { padding: 10px; background: #00ff88; border: none; color: #000; cursor: pointer; transition: background 0.3s; }
+        button:hover { background: #00cc77; }
+        footer { text-align: center; padding: 20px; background: rgba(0, 0, 0, 0.8); }
+        .officer { transition: text-shadow 0.3s; }
+        .officer:hover { text-shadow: 0 0 10px #00ff88; }
+    </style>
+</head>
+<body>
+    <canvas id="techy-bg" class="techy-bg"></canvas>
+    <header>
+        <h1>Section 11 Maguayan</h1>
+        <p>ICT-Computer System Servicing Strand</p>
+    </header>
+    <section id="intro">
+        <h2>Welcome to Our Tech Hub</h2>
+        <p>As ICT majors, we're all about fixing, building, and innovating computer systems. This site is our digital playground – built from scratch to showcase our skills!</p>
+        <div class="counter">Site Visits: <span id="visit-counter">0</span></div>
+    </section>
+    <section id="about">
+        <h2>About Our Strand</h2>
+        <p>ICT-Computer System Servicing focuses on hardware troubleshooting, software installation, network setup, and cybersecurity. We're the ones who keep tech running smoothly!</p>
+        <ul>
+            <li>Hardware Diagnostics</li>
+            <li>OS Installation & Optimization</li>
+            <li>Network Configuration</li>
+            <li>Cybersecurity Basics</li>
+        </ul>
+    </section>
+    <section id="team">
+        <h2>Our Team</h2>
+        <p>Meet the tech wizards and classroom officers of Section 11 Maguayan. We're ready to code, fix, and innovate!</p>
+        <ul>
+            <li class="officer"><strong>President:</strong> Louellah Conde</li>
+            <li class="officer"><strong>Vice President:</strong> Matthayus Villamor</li>
+            <li class="officer"><strong>Peace Officer:</strong> Kathygene Soledad</li>
+            <li class="officer"><strong>Secretary:</strong> Princess Julliane</li>
+            <li class="officer"><strong>Assistant Secretary:</strong> Althea Queem Ostria</li>
+            <li class="officer"><strong>Treasurer:</strong> Alen Tigaldao</li>
+            <li class="officer"><strong>Assistant Treasurer:</strong> Nathaniel Gabriel Dilla</li>
+            <li class="officer"><strong>Muse & Adonis:</strong> Russel Jane Mahinay and Mike Dave Gomez</li>
+            <li class="officer"><strong>Auditor:</strong> Kevin Daniel Distrajo</li>
+        </ul>
+    </section>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2023 Section 11 Maguayan. Powered by ICT Skills.</p>
+    </footer>
+
+    <script>
+        let count = localStorage.getItem('visitCount') || 0;
+        count++;
+        localStorage.setItem('visitCount', count);
+        document.getElementById('visit-counter').textContent = count;
+
+        const canvas = document.getElementById('techy-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
+                size: Math.random() * 3 + 1
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = '#00ff88';
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
